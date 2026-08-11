@@ -1,0 +1,2798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Therapi® Daily Relief Massage Oil</title>
+<style>
+  :root{
+    --forest:#0b2f22;
+    --forest-deep:#082019;
+    --cream:#f6efe0;
+    --cream-2:#efe4cc;
+    --gold:#c8a24a;
+    --gold-light:#e3c883;
+    --clay:#bf5a34;
+    --ink:#1c2620;
+    --muted:#6b7a70;
+    --line:#e2d8bd;
+    --radius:16px;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    background:#dcd6c8;
+    color:var(--ink);
+    display:flex;
+    justify-content:center;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  @font-face{
+    font-family:'PageSerif';
+    src:local('Georgia');
+  }
+
+  /* Phone shell — the real product is mobile-only */
+  .app{
+    width:100%;
+    max-width:430px;
+    min-height:100vh;
+    background:var(--cream);
+    position:relative;
+    overflow-x:hidden;
+    padding-bottom:118px; /* room for sticky bar */
+    box-shadow:0 0 60px rgba(0,0,0,0.25);
+  }
+
+  a{text-decoration:none;color:inherit;}
+
+  /* ---------- Promo Bar ---------- */
+  .promo-bar{
+    background:var(--forest);
+    color:var(--cream);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:8px 14px;
+    font-size:12px;
+    letter-spacing:.2px;
+  }
+  .promo-bar .label{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-weight:600;
+  }
+  .promo-bar .label .dot{
+    width:6px;height:6px;border-radius:50%;
+    background:var(--gold-light);
+    animation:pulse 1.6s infinite ease-in-out;
+  }
+  @keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+  .timer{
+    display:flex;
+    gap:5px;
+    font-variant-numeric:tabular-nums;
+  }
+  .timer .seg{
+    background:rgba(255,255,255,0.12);
+    border-radius:5px;
+    padding:2px 5px;
+    min-width:26px;
+    text-align:center;
+    font-weight:700;
+  }
+  .timer .sep{opacity:.6;padding-top:2px;}
+
+  /* ---------- Header ---------- */
+  .header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px 16px 10px;
+  }
+  .logo{
+    font-family:Georgia,'Times New Roman',serif;
+    font-size:20px;
+    letter-spacing:4px;
+    color:var(--forest);
+    font-weight:700;
+  }
+  .cart-btn{
+    position:relative;
+    width:38px;height:38px;
+    border-radius:50%;
+    background:var(--forest);
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;
+    border:none;
+  }
+  .cart-btn svg{width:18px;height:18px;stroke:var(--cream);}
+  .cart-count{
+    position:absolute;
+    top:-4px;right:-4px;
+    background:var(--clay);
+    color:#fff;
+    font-size:10px;
+    font-weight:700;
+    width:16px;height:16px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+  }
+
+  /* ---------- Title block ---------- */
+  .titleblock{padding:6px 16px 4px;}
+  .titleblock h1{
+    font-family:Georgia,'Times New Roman',serif;
+    font-size:22px;
+    line-height:1.28;
+    margin:0 0 6px;
+    color:var(--ink);
+  }
+  .titleblock h1 .reg{font-size:13px;vertical-align:super;color:var(--gold);}
+  .titleblock p{
+    margin:0;
+    font-size:13.5px;
+    line-height:1.5;
+    color:var(--muted);
+  }
+
+  .pills{
+    display:flex;
+    gap:8px;
+    padding:12px 16px 2px;
+    flex-wrap:wrap;
+  }
+  .pill{
+    display:flex;
+    align-items:center;
+    gap:5px;
+    background:var(--cream-2);
+    border:1px solid var(--line);
+    color:var(--forest);
+    font-size:11.5px;
+    font-weight:600;
+    padding:6px 10px;
+    border-radius:999px;
+    white-space:nowrap;
+  }
+  .pill svg{width:12px;height:12px;stroke:var(--forest);fill:none;}
+
+  /* ---------- Rating ---------- */
+  .rating-row{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:14px 16px 6px;
+  }
+  .avatars{display:flex;}
+  .avatars span{
+    width:26px;height:26px;
+    border-radius:50%;
+    border:2px solid var(--cream);
+    margin-left:-8px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:10px;font-weight:700;color:#fff;
+  }
+  .avatars span:first-child{margin-left:0;}
+  .stars{color:var(--gold);font-size:13px;letter-spacing:1px;}
+  .rating-text{font-size:12px;color:var(--muted);}
+  .rating-text b{color:var(--ink);}
+
+  /* ---------- Image carousel ---------- */
+  .carousel-wrap{
+    margin:14px 16px 0;
+    position:relative;
+  }
+  .carousel{
+    display:flex;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    border-radius:var(--radius);
+    scrollbar-width:none;
+  }
+  .carousel::-webkit-scrollbar{display:none;}
+  .carousel .slide{
+    flex:0 0 100%;
+    scroll-snap-align:start;
+    scroll-snap-stop:always;
+  }
+  .carousel .slide img{display:block;width:100%;}
+  .carousel-dots{
+    display:flex;
+    justify-content:center;
+    gap:6px;
+    margin-top:10px;
+  }
+  .carousel-dots .dot{
+    width:6px;height:6px;
+    border-radius:50%;
+    background:var(--line);
+    transition:background .2s, width .2s;
+    cursor:pointer;
+  }
+  .carousel-dots .dot.active{
+    background:var(--forest);
+    width:16px;
+    border-radius:99px;
+  }
+  .carousel-arrow{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:30px;height:30px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.88);
+    border:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 2px 8px rgba(0,0,0,0.15);
+    cursor:pointer;
+    z-index:5;
+  }
+  .carousel-arrow svg{width:14px;height:14px;stroke:var(--forest);fill:none;}
+  .carousel-arrow.prev{left:8px;}
+  .carousel-arrow.next{right:8px;}
+
+  /* ---------- Inline add-to-cart (below shipping) ---------- */
+  .inline-cart-btn{
+    width:calc(100% - 32px);
+    margin:14px 16px 0;
+    border:none;
+    background:var(--forest);
+    color:var(--cream);
+    font-size:14.5px;
+    font-weight:700;
+    padding:13px;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    cursor:pointer;
+    letter-spacing:.2px;
+  }
+  .inline-cart-btn:active{transform:scale(.98);}
+  .inline-cart-btn svg{width:16px;height:16px;stroke:var(--cream);fill:none;}
+
+  /* ---------- Testimonials ---------- */
+  .section-title{
+    font-family:Georgia,'Times New Roman',serif;
+    font-size:18px;
+    color:var(--forest);
+    text-align:center;
+    margin:26px 16px 12px;
+  }
+  .testimonial-wrap{
+    position:relative;
+    margin:0 16px;
+  }
+  .testimonial-carousel{
+    display:flex;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .testimonial-carousel::-webkit-scrollbar{display:none;}
+  .t-slide{
+    flex:0 0 100%;
+    scroll-snap-align:start;
+    scroll-snap-stop:always;
+    padding:0 2px;
+  }
+  .t-card{
+    background:#fff;
+    border:1.5px solid var(--line);
+    border-radius:var(--radius);
+    padding:18px 18px 16px;
+    min-height:150px;
+  }
+  .t-rating{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:10px;
+  }
+  .t-score{font-size:14px;font-weight:800;color:var(--ink);}
+  .t-stars{color:var(--forest);font-size:13px;letter-spacing:1px;}
+  .t-quote{
+    margin:0 0 16px;
+    font-size:13.5px;
+    line-height:1.55;
+    color:var(--ink);
+    padding:0 20px;
+  }
+  .t-user{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:12px;
+  }
+  .t-avatar{
+    width:34px;height:34px;
+    border-radius:50%;
+    border:1.5px solid var(--forest);
+    background:var(--cream-2);
+    color:var(--forest);
+    display:flex;align-items:center;justify-content:center;
+    font-size:11.5px;font-weight:800;
+    flex:0 0 auto;
+  }
+  .t-name{font-size:13px;font-weight:700;color:var(--ink);}
+  .t-tags{display:flex;gap:8px;flex-wrap:wrap;}
+  .t-tag{
+    border:1.3px solid var(--forest);
+    color:var(--forest);
+    font-size:11px;
+    font-weight:600;
+    padding:5px 11px;
+    border-radius:999px;
+  }
+  .testimonial-wrap .carousel-arrow{top:70px;}
+
+  /* ---------- Marquee ---------- */
+  .marquee-wrap{
+    width:100%;
+    overflow:hidden;
+    background:var(--forest);
+    padding:13px 0;
+    margin-top:26px;
+  }
+  .marquee-track{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    width:max-content;
+    animation:marquee 16s linear infinite;
+  }
+  .marquee-track .item{
+    font-size:12.5px;
+    font-weight:700;
+    letter-spacing:1.2px;
+    text-transform:uppercase;
+    color:var(--cream);
+    white-space:nowrap;
+  }
+  .marquee-track .sep{
+    color:var(--gold);
+    font-size:8px;
+  }
+  @keyframes marquee{
+    0%{transform:translateX(0);}
+    100%{transform:translateX(-50%);}
+  }
+
+  /* ---------- Video reels ---------- */
+  .reels-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 16px;
+    margin:26px 0 12px;
+  }
+  .reels-header .section-title{margin:0;text-align:left;}
+  .reel-arrows{display:flex;gap:8px;}
+  .reel-arrow{
+    width:28px;height:28px;
+    border-radius:50%;
+    border:1.3px solid var(--line);
+    background:#fff;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;
+  }
+  .reel-arrow svg{width:12px;height:12px;stroke:var(--forest);fill:none;}
+  .reels-track{
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+    scroll-snap-type:x proximity;
+    -webkit-overflow-scrolling:touch;
+    padding:0 16px 4px;
+    scrollbar-width:none;
+  }
+  .reels-track::-webkit-scrollbar{display:none;}
+  .reel-card{
+    position:relative;
+    flex:0 0 62%;
+    aspect-ratio:9/16;
+    border-radius:16px;
+    overflow:hidden;
+    background:#0a1a14;
+    scroll-snap-align:start;
+    cursor:pointer;
+  }
+  .reel-card video{
+    width:100%;height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  .reel-card .mute-btn{
+    position:absolute;
+    bottom:10px;right:10px;
+    width:26px;height:26px;
+    border-radius:50%;
+    background:rgba(0,0,0,0.45);
+    display:flex;align-items:center;justify-content:center;
+    z-index:2;
+  }
+  .reel-card .mute-btn svg{width:12px;height:12px;stroke:#fff;fill:none;}
+  .reel-card .reel-shade{
+    position:absolute;
+    left:0;right:0;bottom:0;
+    height:40%;
+    background:linear-gradient(to top, rgba(0,0,0,0.35), rgba(0,0,0,0));
+    pointer-events:none;
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq-wrap{
+    padding:0 16px;
+    margin-top:10px;
+  }
+  .faq-item{
+    border-bottom:1px solid var(--line);
+  }
+  .faq-item:first-child{border-top:1px solid var(--line);}
+  .faq-q{
+    width:100%;
+    background:none;
+    border:none;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:15px 2px;
+    text-align:left;
+    cursor:pointer;
+    font-family:inherit;
+  }
+  .faq-q span.q-text{
+    font-size:13.5px;
+    font-weight:700;
+    color:var(--ink);
+    line-height:1.4;
+  }
+  .faq-icon{
+    width:20px;height:20px;
+    border-radius:50%;
+    border:1.3px solid var(--forest);
+    flex:0 0 auto;
+    display:flex;align-items:center;justify-content:center;
+    position:relative;
+  }
+  .faq-icon::before,.faq-icon::after{
+    content:"";
+    position:absolute;
+    background:var(--forest);
+    transition:transform .2s ease, opacity .2s ease;
+  }
+  .faq-icon::before{width:9px;height:1.5px;}
+  .faq-icon::after{width:1.5px;height:9px;}
+  .faq-item.open .faq-icon::after{transform:rotate(90deg);opacity:0;}
+  .faq-a{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .25s ease;
+  }
+  .faq-a p{
+    margin:0 2px 16px;
+    font-size:12.5px;
+    line-height:1.6;
+    color:var(--muted);
+  }
+
+  /* ---------- Method section ---------- */
+  .method-wrap{padding:0 16px;margin-top:6px;}
+  .method-list{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    margin-top:16px;
+  }
+  .method-item{
+    border:1.3px solid var(--line);
+    border-radius:var(--radius);
+    background:#fff;
+    overflow:hidden;
+  }
+  .method-q{
+    width:100%;
+    background:none;
+    border:none;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:12px;
+    cursor:pointer;
+    font-family:inherit;
+    text-align:left;
+  }
+  .method-thumb{
+    width:52px;height:52px;
+    border-radius:12px;
+    flex:0 0 auto;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .method-thumb svg{width:24px;height:24px;stroke:#fff;fill:none;}
+  .method-info{flex:1;min-width:0;}
+  .method-title{font-size:13.5px;font-weight:700;color:var(--ink);}
+  .method-sub{font-size:11.5px;font-weight:600;color:var(--forest);margin-top:2px;}
+  .method-item .faq-a{padding:0 14px;}
+  .method-item .faq-a p{margin:0 0 14px;}
+
+  .divider-line{
+    height:1px;
+    background:var(--line);
+    margin:28px 16px;
+  }
+
+  /* ---------- Trusted stars row ---------- */
+  .trusted-row{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+    font-size:12px;
+    color:var(--muted);
+    font-weight:600;
+    margin-bottom:6px;
+  }
+  .trusted-row .stars-icons{color:var(--forest);font-size:13px;letter-spacing:1px;}
+
+  /* ---------- Gender review filter ---------- */
+  .gender-toggle{
+    display:flex;
+    gap:10px;
+    padding:0 16px;
+    margin:18px 0 16px;
+  }
+  .gender-btn{
+    flex:1;
+    padding:11px;
+    border-radius:10px;
+    border:1.3px solid var(--forest);
+    background:#fff;
+    color:var(--forest);
+    font-weight:700;
+    font-size:13px;
+    cursor:pointer;
+    font-family:inherit;
+    transition:background .15s, color .15s;
+  }
+  .gender-btn.active{
+    background:var(--forest);
+    color:var(--cream);
+  }
+  .gender-reviews{
+    padding:0 16px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+  .g-review{
+    border:1.3px solid var(--line);
+    border-radius:var(--radius);
+    padding:16px 16px 14px;
+    background:#fff;
+  }
+  .g-review .g-rating{
+    font-size:12.5px;
+    font-weight:800;
+    color:var(--ink);
+    display:flex;
+    align-items:center;
+    gap:6px;
+    margin-bottom:10px;
+  }
+  .g-review .g-rating .stars{color:var(--forest);font-size:13px;letter-spacing:1px;}
+  .g-review p{
+    margin:0 0 12px;
+    font-size:13px;
+    line-height:1.6;
+    color:var(--ink);
+  }
+  .g-review .g-meta{
+    font-size:11.5px;
+    color:var(--muted);
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:6px;
+  }
+  .g-review .g-meta b{color:var(--ink);font-weight:700;}
+  .g-review .g-meta .verified{
+    display:flex;
+    align-items:center;
+    gap:4px;
+    color:var(--forest);
+    font-weight:600;
+  }
+  .g-review .g-meta .verified svg{width:12px;height:12px;stroke:var(--forest);fill:none;}
+  .g-review .g-meta .sep{color:var(--line);}
+
+  /* ---------- Tutorial carousel ---------- */
+  .tutorial-wrap{padding:0 16px;margin-top:32px;}
+  .tutorial-intro{
+    text-align:center;
+    font-size:13px;
+    color:var(--muted);
+    padding:0 8px;
+    margin:6px 0 18px;
+    line-height:1.5;
+  }
+  .tutorial-carousel{
+    display:flex;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .tutorial-carousel::-webkit-scrollbar{display:none;}
+  .tutorial-slide{
+    flex:0 0 100%;
+    scroll-snap-align:start;
+    scroll-snap-stop:always;
+    padding:0 1px;
+  }
+  .tutorial-card{
+    background:var(--forest);
+    border-radius:20px;
+    padding:16px;
+  }
+  .tutorial-step-pill{
+    display:inline-flex;
+    background:var(--cream);
+    color:var(--forest);
+    font-weight:800;
+    font-size:12px;
+    padding:6px 16px;
+    border-radius:999px;
+    margin-bottom:14px;
+  }
+  .tutorial-img-wrap{
+    border-radius:14px;
+    overflow:hidden;
+  }
+  .tutorial-img-wrap img{width:100%;display:block;}
+  .tutorial-heading{
+    font-family:Georgia,'Times New Roman',serif;
+    font-size:19px;
+    color:var(--ink);
+    margin:20px 2px 8px;
+  }
+  .tutorial-desc{
+    font-size:13px;
+    line-height:1.6;
+    color:var(--muted);
+    margin:0 2px;
+  }
+  .tutorial-desc b{color:var(--ink);}
+  .tutorial-nav{
+    display:flex;
+    justify-content:center;
+    gap:16px;
+    margin-top:22px;
+  }
+  .tutorial-nav button{
+    width:34px;height:34px;
+    border-radius:50%;
+    border:1.3px solid var(--forest);
+    background:#fff;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;
+  }
+  .tutorial-nav svg{width:14px;height:14px;stroke:var(--forest);fill:none;}
+
+  /* ---------- Results / stats ---------- */
+  .results-wrap{padding:0 16px;margin-top:36px;}
+  .results-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-top:18px;
+  }
+  .stat-card{
+    background:#fff;
+    border:1.3px solid var(--line);
+    border-radius:16px;
+    padding:16px;
+  }
+  .stat-top{
+    display:flex;
+    align-items:center;
+    margin-bottom:10px;
+  }
+  .stat-num-row{display:flex;align-items:baseline;}
+  .stat-num{font-size:28px;font-weight:800;color:var(--forest);}
+  .stat-percent{font-size:19px;font-weight:800;color:var(--forest);}
+  .stat-arrow-circle{
+    margin-left:auto;
+    width:24px;height:24px;
+    border-radius:50%;
+    border:1.3px solid var(--forest);
+    display:flex;align-items:center;justify-content:center;
+    flex:0 0 auto;
+  }
+  .stat-arrow-circle svg{width:12px;height:12px;stroke:var(--forest);fill:none;}
+  .stat-card p{margin:0;font-size:12px;line-height:1.5;color:var(--muted);}
+  .photo-card{
+    border-radius:16px;
+    overflow:hidden;
+    min-height:100%;
+  }
+  .photo-card img{width:100%;height:100%;object-fit:cover;display:block;}
+  .quote-box{
+    margin-top:14px;
+    background:#fff;
+    border:1.3px solid var(--line);
+    border-radius:16px;
+    padding:16px;
+  }
+  .quote-box p{
+    margin:0 0 10px;
+    font-size:13px;
+    line-height:1.6;
+    color:var(--ink);
+    font-style:italic;
+  }
+  .quote-author{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-size:12px;
+    font-weight:700;
+    color:var(--ink);
+  }
+  .quote-author svg{width:14px;height:14px;stroke:var(--forest);fill:none;}
+
+  /* ---------- Weekly Journey ---------- */
+  .journey-section{
+    width:100%;
+    background:var(--forest-deep);
+    margin-top:36px;
+  }
+  .journey-hero{
+    position:relative;
+    height:200px;
+    overflow:hidden;
+  }
+  .journey-hero img{
+    width:100%;height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  .journey-hero::after{
+    content:"";
+    position:absolute;
+    left:0;right:0;bottom:0;
+    height:60%;
+    background:linear-gradient(to top, var(--forest-deep), rgba(8,32,25,0));
+  }
+  .journey-content{padding:18px 18px 30px;}
+  .journey-title{
+    font-family:Georgia,'Times New Roman',serif;
+    font-size:22px;
+    color:#fff;
+    margin:0 0 4px;
+  }
+  .journey-sub{
+    font-size:12.5px;
+    color:rgba(255,255,255,0.65);
+    margin:0 0 26px;
+  }
+  .week-item{
+    display:flex;
+    gap:14px;
+    position:relative;
+    padding-bottom:26px;
+  }
+  .week-item:last-child{padding-bottom:0;}
+  .week-item:not(:last-child)::before{
+    content:"";
+    position:absolute;
+    left:13px;
+    top:28px;
+    bottom:0;
+    border-left:2px dashed rgba(255,255,255,0.22);
+  }
+  .week-marker{
+    width:27px;height:27px;
+    border-radius:50%;
+    background:var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    flex:0 0 auto;
+    position:relative;
+    z-index:2;
+  }
+  .week-marker svg{width:13px;height:13px;stroke:var(--forest-deep);fill:none;}
+  .week-body{flex:1;padding-top:2px;min-width:0;}
+  .week-title{
+    color:#fff;
+    font-weight:800;
+    font-size:14px;
+    margin-bottom:10px;
+    line-height:1.4;
+  }
+  .week-bullets{
+    list-style:none;
+    margin:0 0 12px;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+  }
+  .week-bullets li{
+    display:flex;
+    align-items:flex-start;
+    gap:8px;
+    color:rgba(255,255,255,0.8);
+    font-size:12.5px;
+    line-height:1.5;
+  }
+  .week-bullets li::before{
+    content:"";
+    width:5px;height:5px;
+    border-radius:50%;
+    background:var(--gold-light);
+    margin-top:7px;
+    flex:0 0 auto;
+  }
+  .week-stat{
+    background:rgba(255,255,255,0.07);
+    border:1px solid rgba(255,255,255,0.2);
+    border-radius:12px;
+    padding:10px 12px;
+    font-size:11.5px;
+    color:rgba(255,255,255,0.85);
+    line-height:1.55;
+  }
+  .week-stat b{color:var(--gold-light);}
+
+  /* ---------- Comparison table ---------- */
+  .compare-wrap{padding:0 16px;margin-top:36px;}
+  .compare-header{
+    display:grid;
+    grid-template-columns:1.3fr 1fr 1fr;
+    align-items:end;
+    padding:0 0 10px;
+  }
+  .compare-header .brand-col{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:5px;
+  }
+  .compare-header .brand-col img{width:30px;}
+  .compare-header .brand-col span{font-size:11.5px;font-weight:800;color:var(--forest);}
+  .compare-header .other-col{
+    text-align:center;
+    font-size:11.5px;
+    font-weight:700;
+    color:var(--muted);
+  }
+  .compare-row{
+    display:grid;
+    grid-template-columns:1.3fr 1fr 1fr;
+    align-items:stretch;
+    border-bottom:1px dashed var(--line);
+  }
+  .compare-row .label{
+    font-size:12px;
+    font-weight:700;
+    color:var(--ink);
+    padding:14px 8px 14px 0;
+    display:flex;
+    align-items:center;
+    line-height:1.35;
+  }
+  .compare-row .therapi-cell{
+    background:var(--cream-2);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:12px 0;
+  }
+  .compare-row.first-row .therapi-cell{border-radius:14px 14px 0 0;}
+  .compare-row.last-row .therapi-cell{border-radius:0 0 14px 14px;}
+  .compare-row .other-cell{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .check-badge{
+    width:25px;height:25px;
+    border-radius:50%;
+    background:var(--forest);
+    display:flex;align-items:center;justify-content:center;
+    flex:0 0 auto;
+  }
+  .check-badge svg{width:12px;height:12px;stroke:#fff;fill:none;}
+  .x-badge{
+    width:25px;height:25px;
+    border-radius:50%;
+    border:1.5px solid #d9a598;
+    display:flex;align-items:center;justify-content:center;
+    flex:0 0 auto;
+  }
+  .x-badge svg{width:11px;height:11px;stroke:#c1503b;fill:none;}
+
+  /* ---------- 5 Reasons carousel ---------- */
+  .reasons-wrap{padding:0 16px;margin-top:36px;}
+  .reasons-carousel{
+    display:flex;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .reasons-carousel::-webkit-scrollbar{display:none;}
+  .reason-slide{
+    flex:0 0 100%;
+    scroll-snap-align:start;
+    scroll-snap-stop:always;
+    padding:0 1px;
+  }
+  .reason-card{
+    background:#fff;
+    border:1.3px solid var(--line);
+    border-radius:20px;
+    overflow:hidden;
+  }
+  .reason-img-wrap{position:relative;}
+  .reason-img-wrap img{
+    width:100%;
+    display:block;
+    aspect-ratio:4/3;
+    object-fit:cover;
+  }
+  .reason-pill{
+    position:absolute;
+    left:16px;
+    bottom:-14px;
+    background:var(--forest);
+    color:#fff;
+    font-weight:800;
+    font-size:11.5px;
+    padding:7px 16px;
+    border-radius:999px;
+    z-index:2;
+  }
+  .reason-content{padding:26px 18px 20px;}
+  .reason-heading{
+    font-family:Georgia,'Times New Roman',serif;
+    font-size:17px;
+    color:var(--ink);
+    margin:0 0 8px;
+  }
+  .reason-desc{
+    font-size:12.5px;
+    line-height:1.6;
+    color:var(--muted);
+    margin:0;
+  }
+  .reasons-nav{
+    display:flex;
+    justify-content:center;
+    gap:16px;
+    margin-top:18px;
+  }
+  .reasons-nav button{
+    width:34px;height:34px;
+    border-radius:50%;
+    border:1.3px solid var(--forest);
+    background:#fff;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;
+  }
+  .reasons-nav svg{width:14px;height:14px;stroke:var(--forest);fill:none;}
+
+  /* ---------- Guarantee banner ---------- */
+  .guarantee-banner-wrap{
+    padding:0 16px;
+    margin-top:34px;
+  }
+  .guarantee-banner-wrap img{
+    width:100%;
+    display:block;
+    border-radius:20px;
+  }
+
+  /* ---------- Transformations carousel ---------- */
+  .transform-wrap{padding:0 16px;margin-top:32px;position:relative;}
+  .transform-carousel{
+    display:flex;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .transform-carousel::-webkit-scrollbar{display:none;}
+  .transform-slide{
+    flex:0 0 100%;
+    scroll-snap-align:start;
+    scroll-snap-stop:always;
+    padding:0 1px;
+  }
+  .transform-card{
+    background:#fff;
+    border:1.3px solid var(--line);
+    border-radius:20px;
+    overflow:hidden;
+  }
+  .transform-photo{
+    width:100%;
+    aspect-ratio:4/3;
+    object-fit:cover;
+    display:block;
+  }
+  .transform-video-wrap{position:relative;}
+  .transform-video-wrap video{
+    width:100%;
+    aspect-ratio:4/3;
+    object-fit:cover;
+    display:block;
+  }
+  .transform-video-wrap .mute-btn{
+    position:absolute;
+    bottom:10px;right:10px;
+    width:28px;height:28px;
+    border-radius:50%;
+    background:rgba(0,0,0,0.45);
+    display:flex;align-items:center;justify-content:center;
+    z-index:2;
+    cursor:pointer;
+  }
+  .transform-video-wrap .mute-btn svg{width:13px;height:13px;stroke:#fff;fill:none;}
+  .transform-content{padding:18px 18px 20px;}
+  .transform-stars{color:var(--gold);font-size:14px;letter-spacing:1px;margin-bottom:10px;}
+  .transform-heading{
+    font-family:Georgia,'Times New Roman',serif;
+    font-size:16.5px;
+    color:var(--ink);
+    margin:0 0 8px;
+    line-height:1.35;
+  }
+  .transform-quote{
+    font-size:12.5px;
+    line-height:1.6;
+    color:var(--muted);
+    margin:0 0 14px;
+  }
+  .transform-meta{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding-top:12px;
+    border-top:1px solid var(--line);
+  }
+  .transform-name{font-size:12.5px;font-weight:700;color:var(--ink);}
+  .transform-verified{
+    display:flex;
+    align-items:center;
+    gap:4px;
+    font-size:11px;
+    font-weight:600;
+    color:var(--forest);
+  }
+  .transform-verified svg{width:12px;height:12px;stroke:var(--forest);fill:none;}
+  .transform-nav{
+    display:flex;
+    justify-content:center;
+    gap:16px;
+    margin-top:18px;
+  }
+  .transform-nav button{
+    width:34px;height:34px;
+    border-radius:50%;
+    border:1.3px solid var(--forest);
+    background:#fff;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;
+  }
+  .transform-nav svg{width:14px;height:14px;stroke:var(--forest);fill:none;}
+
+  /* ---------- Stock up / second pay section ---------- */
+  .stockup-wrap{
+    padding:26px 16px 28px;
+    margin-top:34px;
+    background:var(--cream-2);
+  }
+  .stockup-title{
+    font-family:Georgia,'Times New Roman',serif;
+    font-size:20px;
+    color:var(--ink);
+    margin:0 0 6px;
+  }
+  .stockup-sub{
+    font-size:12.5px;
+    color:var(--muted);
+    line-height:1.5;
+    margin:0 0 18px;
+  }
+  .stockup-recap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin:14px 2px 8px;
+  }
+  .stockup-recap .sticky-price .now{font-size:19px;}
+  .stockup-refill{
+    text-align:center;
+    font-size:11px;
+    color:var(--muted);
+    margin-top:10px;
+  }
+
+  /* ---------- Footer ---------- */
+  .site-footer{
+    width:100%;
+    background:var(--forest-deep);
+    color:rgba(255,255,255,0.82);
+    padding:34px 20px 26px;
+    margin-top:0;
+  }
+  .footer-trustline{
+    text-align:center;
+    font-size:11px;
+    color:rgba(255,255,255,0.55);
+    padding-bottom:22px;
+    margin-bottom:22px;
+    border-bottom:1px solid rgba(255,255,255,0.12);
+  }
+  .footer-logo{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-family:Georgia,'Times New Roman',serif;
+    font-size:17px;
+    letter-spacing:3px;
+    color:#fff;
+    font-weight:700;
+    margin-bottom:24px;
+  }
+  .footer-logo svg{width:20px;height:20px;stroke:var(--gold-light);fill:none;}
+  .footer-cols{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+    margin-bottom:28px;
+  }
+  .footer-col h4{
+    font-size:12px;
+    font-weight:800;
+    color:#fff;
+    text-transform:uppercase;
+    letter-spacing:.6px;
+    margin:0 0 12px;
+  }
+  .footer-col a{
+    display:block;
+    font-size:12.5px;
+    color:rgba(255,255,255,0.7);
+    margin-bottom:10px;
+  }
+  .footer-newsletter{
+    padding-top:24px;
+    border-top:1px solid rgba(255,255,255,0.12);
+    margin-bottom:26px;
+  }
+  .footer-newsletter h4{
+    font-size:14.5px;
+    font-weight:800;
+    color:#fff;
+    margin:0 0 6px;
+  }
+  .footer-newsletter p{
+    font-size:12px;
+    color:rgba(255,255,255,0.65);
+    margin:0 0 14px;
+    line-height:1.5;
+  }
+  .footer-form{
+    display:flex;
+    gap:8px;
+  }
+  .footer-form input{
+    flex:1;
+    min-width:0;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.25);
+    border-radius:10px;
+    padding:11px 12px;
+    font-size:12.5px;
+    color:#fff;
+    font-family:inherit;
+  }
+  .footer-form input::placeholder{color:rgba(255,255,255,0.45);}
+  .footer-form button{
+    background:var(--gold);
+    color:var(--forest-deep);
+    border:none;
+    border-radius:10px;
+    padding:0 16px;
+    font-size:12.5px;
+    font-weight:800;
+    cursor:pointer;
+    font-family:inherit;
+    white-space:nowrap;
+  }
+  .footer-address{
+    font-size:12px;
+    line-height:1.7;
+    color:rgba(255,255,255,0.6);
+    padding-top:22px;
+    border-top:1px solid rgba(255,255,255,0.12);
+  }
+  .footer-address b{color:rgba(255,255,255,0.85);}
+  .footer-legal{
+    font-size:10.5px;
+    line-height:1.7;
+    color:rgba(255,255,255,0.4);
+    margin-top:20px;
+  }
+  .footer-legal p{margin:0 0 10px;}
+
+  /* ---------- Sold progress ---------- */
+  .sold-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:18px 16px 6px;
+  }
+  .sold-track{
+    flex:1;
+    height:7px;
+    border-radius:99px;
+    background:var(--cream-2);
+    overflow:hidden;
+    border:1px solid var(--line);
+  }
+  .sold-fill{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,var(--clay),var(--gold));
+    border-radius:99px;
+    transition:width 1.4s cubic-bezier(.2,.8,.2,1);
+  }
+  .sold-label{font-size:11.5px;font-weight:700;color:var(--forest);white-space:nowrap;}
+
+  .nutrition-btn{
+    margin:8px 16px 4px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    border:1px solid var(--forest);
+    color:var(--forest);
+    background:transparent;
+    font-size:12.5px;
+    font-weight:600;
+    padding:10px;
+    border-radius:10px;
+    width:calc(100% - 32px);
+    cursor:pointer;
+  }
+  .nutrition-btn svg{width:14px;height:14px;stroke:var(--forest);fill:none;}
+
+  /* ---------- Pricing tiers ---------- */
+  .tiers{padding:16px 16px 4px;display:flex;flex-direction:column;gap:10px;}
+  .tier{
+    position:relative;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    border:2px solid var(--line);
+    border-radius:var(--radius);
+    padding:10px 12px;
+    background:#fff;
+    cursor:pointer;
+    transition:border-color .15s, box-shadow .15s;
+  }
+  .tier.selected{
+    border-color:var(--forest);
+    box-shadow:0 4px 14px rgba(11,47,34,0.12);
+  }
+  .tier .radio{
+    width:18px;height:18px;
+    border-radius:50%;
+    border:2px solid var(--muted);
+    flex:0 0 auto;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .tier.selected .radio{border-color:var(--forest);}
+  .tier.selected .radio::after{
+    content:"";
+    width:9px;height:9px;
+    border-radius:50%;
+    background:var(--forest);
+  }
+  .tier .thumb{
+    width:52px;height:52px;
+    flex:0 0 auto;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .tier .thumb img{max-width:100%;max-height:100%;object-fit:contain;}
+  .tier .info{flex:1;min-width:0;}
+  .tier .info .name{font-size:13.5px;font-weight:700;color:var(--ink);}
+  .tier .info .sub{font-size:11px;color:var(--muted);margin-top:1px;}
+  .tier .price-col{text-align:right;flex:0 0 auto;}
+  .tier .price-col .now{font-size:15px;font-weight:800;color:var(--forest);}
+  .tier .price-col .was{font-size:11px;color:var(--muted);text-decoration:line-through;margin-left:4px;}
+  .badge{
+    position:absolute;
+    top:-9px;right:14px;
+    background:var(--clay);
+    color:#fff;
+    font-size:10px;
+    font-weight:700;
+    padding:3px 9px;
+    border-radius:999px;
+    letter-spacing:.3px;
+  }
+
+  .ship-row{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:12px 16px 4px;
+    font-size:12px;
+    color:var(--forest);
+    font-weight:600;
+  }
+  .ship-row svg{width:15px;height:15px;stroke:var(--forest);fill:none;flex:0 0 auto;}
+  .ship-row .date{color:var(--ink);text-decoration:underline;text-underline-offset:2px;}
+
+  .guarantee-row{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    padding:16px 16px 4px;
+    font-size:11px;
+    color:var(--muted);
+  }
+  .guarantee-row svg{width:14px;height:14px;stroke:var(--gold);fill:none;}
+
+  .footnote{
+    text-align:center;
+    font-size:10.5px;
+    color:var(--muted);
+    padding:10px 24px 4px;
+    line-height:1.5;
+  }
+
+  /* ---------- Sticky bottom bar ---------- */
+  .sticky-bar{
+    position:fixed;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:100%;
+    max-width:430px;
+    background:var(--cream);
+    border-top:1px solid var(--line);
+    padding:10px 16px calc(12px + env(safe-area-inset-bottom));
+    box-shadow:0 -8px 24px rgba(0,0,0,0.08);
+    z-index:50;
+    transition:transform .25s ease;
+  }
+  .sticky-bar.hide-a-bit{transform:translate(-50%,4px);}
+  .sticky-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:8px;
+  }
+  .sticky-price{display:flex;align-items:baseline;gap:6px;}
+  .sticky-price .now{font-size:17px;font-weight:800;color:var(--forest);}
+  .sticky-price .was{font-size:12px;color:var(--muted);text-decoration:line-through;}
+  .sticky-tag{font-size:10.5px;color:var(--clay);font-weight:700;}
+  .add-cart-btn{
+    width:100%;
+    border:none;
+    background:var(--forest);
+    color:var(--cream);
+    font-size:14.5px;
+    font-weight:700;
+    padding:13px;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    cursor:pointer;
+    letter-spacing:.2px;
+  }
+  .add-cart-btn:active{transform:scale(.98);}
+  .add-cart-btn svg{width:16px;height:16px;stroke:var(--cream);fill:none;}
+  .money-back{
+    text-align:center;
+    font-size:10.5px;
+    color:var(--muted);
+    margin-top:7px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+  }
+  .money-back svg{width:12px;height:12px;stroke:var(--gold);fill:none;}
+
+  /* ---------- Modal ---------- */
+  .modal-overlay{
+    position:fixed;inset:0;
+    background:rgba(8,32,25,0.55);
+    display:none;
+    align-items:flex-end;
+    justify-content:center;
+    z-index:100;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal{
+    width:100%;
+    max-width:430px;
+    background:var(--cream);
+    border-radius:20px 20px 0 0;
+    padding:20px 20px calc(24px + env(safe-area-inset-bottom));
+    max-height:80vh;
+    overflow-y:auto;
+    animation:slideUp .25s ease;
+  }
+  @keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
+  .modal h3{
+    font-family:Georgia,serif;
+    color:var(--forest);
+    margin:0 0 12px;
+    font-size:18px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .modal .close{
+    width:26px;height:26px;
+    border-radius:50%;
+    background:var(--cream-2);
+    display:flex;align-items:center;justify-content:center;
+    font-size:14px;
+    cursor:pointer;
+  }
+  .modal ul{margin:0;padding-left:18px;font-size:13px;color:var(--ink);line-height:1.9;}
+  .modal .ingredient-row{
+    display:flex;justify-content:space-between;
+    font-size:13px;padding:8px 0;border-bottom:1px solid var(--line);
+  }
+  .modal .ingredient-row span:first-child{color:var(--ink);font-weight:600;}
+  .modal .ingredient-row span:last-child{color:var(--muted);}
+</style>
+</head>
+<body>
+
+<div class="app" id="app">
+
+  <!-- Promo bar -->
+  <div class="promo-bar">
+    <div class="label"><span class="dot"></span> Summer Sale, 40% Off</div>
+    <div class="timer">
+      <span class="seg" id="hh">01</span><span class="sep">:</span>
+      <span class="seg" id="mm">13</span><span class="sep">:</span>
+      <span class="seg" id="ss">13</span>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">THERAPI</div>
+    <button class="cart-btn" onclick="scrollToBar()">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      <span class="cart-count" id="cartCount">1</span>
+    </button>
+  </div>
+
+  <!-- Title -->
+  <div class="titleblock">
+    <h1>Therapi<span class="reg">®</span> Daily Relief Massage Oil</h1>
+    <p>Ease joint stiffness, soothe tired muscles &amp; support smoother, nourished skin with one simple daily massage ritual.</p>
+  </div>
+
+  <!-- Feature pills -->
+  <div class="pills">
+    <div class="pill">
+      <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12a4 4 0 0 1 4-4h1a4 4 0 0 1 4 4v1a4 4 0 0 1-4 4h-1"/><circle cx="10" cy="6" r="2"/></svg>
+      Joint &amp; Muscle Support
+    </div>
+    <div class="pill">
+      <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/></svg>
+      Reduces Swelling
+    </div>
+    <div class="pill">
+      <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v2M5 5l1.5 1.5M3 12h2M5 19l1.5-1.5M12 19v2M17.5 17.5L19 19M19 5l-1.5 1.5M19 12h2"/><circle cx="12" cy="12" r="4"/></svg>
+      Glow &amp; Anti-Aging
+    </div>
+  </div>
+
+  <!-- Rating -->
+  <div class="rating-row">
+    <div class="avatars">
+      <span style="background:#bf5a34;">M</span>
+      <span style="background:#0b2f22;">J</span>
+      <span style="background:#c8a24a;">R</span>
+      <span style="background:#6b7a70;">S</span>
+    </div>
+    <div class="stars">★★★★★</div>
+    <div class="rating-text"><b>4.9</b> Excellent · 12,480+ Reviews</div>
+  </div>
+
+  <!-- Image carousel -->
+  <div class="carousel-wrap">
+    <button class="carousel-arrow prev" onclick="moveSlide(-1)" aria-label="Previous image">
+      <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button class="carousel-arrow next" onclick="moveSlide(1)" aria-label="Next image">
+      <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+    </button> 
+    <div class="carousel" id="carousel">
+      <div class="slide"><img src="images/senior_woman.png" alt="Woman applying Therapi Daily Relief massage oil to her shoulder"></div>
+      <div class="slide"><img src="images/therapi_ad.png" alt="Therapi Daily Relief - Get 25% off, 93% recommend Therapi"></div>
+      <div class="slide"><img src="images/therapi_ad2.png" alt="Natural comfort for everyday movement - joint and muscle support, glow and anti-aging, daily relief"></div>
+    </div>
+    <div class="carousel-dots" id="carouselDots">
+      <span class="dot active" onclick="goToSlide(0)"></span>
+      <span class="dot" onclick="goToSlide(1)"></span>
+      <span class="dot" onclick="goToSlide(2)"></span>
+    </div>
+  </div>
+
+  <!-- Sold progress -->
+  <div class="sold-row">
+    <div class="sold-track"><div class="sold-fill" id="soldFill"></div></div>
+    <div class="sold-label">93% Sold</div>
+  </div>
+
+  <button class="nutrition-btn" onclick="openModal()">
+    <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+    See Ingredients &amp; Info
+  </button>
+
+  <!-- Pricing tiers -->
+  <div class="tiers" id="tiers">
+    <div class="tier" data-tier="one" data-now="29.99" data-was="39.99" data-label="Buy One">
+      <div class="radio"></div>
+      <div class="thumb"><img src="images/buy_one-removebg-preview.png" alt="One bottle of Therapi Daily Relief"></div>
+      <div class="info">
+        <div class="name">Buy One</div>
+        <div class="sub">$29.99 per bottle</div>
+      </div>
+      <div class="price-col"><span class="now">$29.99</span><span class="was">$39.99</span></div>
+    </div>
+
+    <div class="tier selected" data-tier="two" data-now="59.99" data-was="79.99" data-label="Buy 2, Get 1 Free">
+      <span class="badge">Most Popular</span>
+      <div class="radio"></div>
+      <div class="thumb"><img src="images/buy_two-removebg-preview.png" alt="Three bottles of Therapi Daily Relief"></div>
+      <div class="info">
+        <div class="name">Buy 2, Get 1 Free</div>
+        <div class="sub">$19.99 per bottle</div>
+      </div>
+      <div class="price-col"><span class="now">$59.99</span><span class="was">$79.99</span></div>
+    </div>
+
+    <div class="tier" data-tier="three" data-now="89.99" data-was="119.99" data-label="Buy 3, Get 2 Free">
+      <span class="badge" style="background:var(--forest);">Free Shipping</span>
+      <div class="radio"></div>
+      <div class="thumb"><img src="images/buy_three-removebg-preview.png" alt="Five bottles of Therapi Daily Relief"></div>
+      <div class="info">
+        <div class="name">Buy 3, Get 2 Free</div>
+        <div class="sub">$17.99 per bottle</div>
+      </div>
+      <div class="price-col"><span class="now">$89.99</span><span class="was">$119.99</span></div>
+    </div>
+  </div>
+
+  <div class="ship-row">
+    <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="15" height="12" rx="2"/><path d="M16 10h3.5a1.5 1.5 0 0 1 1.32.79L23 14v4a1 1 0 0 1-1 1h-1.5"/><circle cx="6" cy="19.5" r="1.75"/><circle cx="18" cy="19.5" r="1.75"/></svg>
+    Ready to ship — arrives by <span class="date" id="shipDate">Aug 14</span>
+  </div>
+
+  <button class="inline-cart-btn" onclick="addToCart('cartBtnLabel2')">
+    <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+    <span id="cartBtnLabel2">Add To Cart</span>
+  </button>
+
+  <div class="guarantee-row">
+    <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg>
+    30-Day Money Back Guarantee
+  </div>
+
+  <!-- Testimonials -->
+  <h2 class="section-title">What Our Customers Say</h2>
+  <div class="testimonial-wrap">
+    <button class="carousel-arrow prev" onclick="moveTestimonial(-1)" aria-label="Previous testimonial">
+      <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button class="carousel-arrow next" onclick="moveTestimonial(1)" aria-label="Next testimonial">
+      <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+    <div class="testimonial-carousel" id="testimonialCarousel">
+      <div class="t-slide">
+        <div class="t-card">
+          <div class="t-rating"><span class="t-score">4.9</span><span class="t-stars">★★★★★</span></div>
+          <p class="t-quote">"In just 7 days I've noticed I feel so much less stiff, and my shoulders move so much easier!"</p>
+          <div class="t-user">
+            <span class="t-avatar" style="border-color:#bf5a34;color:#bf5a34;">MK</span>
+            <span class="t-name">Maria K., 41 years</span>
+          </div>
+          <div class="t-tags">
+            <span class="t-tag">Visible Results</span>
+            <span class="t-tag">Less Stiffness</span>
+          </div>
+        </div>
+      </div>
+      <div class="t-slide">
+        <div class="t-card">
+          <div class="t-rating"><span class="t-score">5.0</span><span class="t-stars">★★★★★</span></div>
+          <p class="t-quote">"My lower back pain after long shifts finally feels manageable. This oil is part of my nightly routine now."</p>
+          <div class="t-user">
+            <span class="t-avatar" style="border-color:#0b2f22;color:#0b2f22;">JR</span>
+            <span class="t-name">James R., 54 years</span>
+          </div>
+          <div class="t-tags">
+            <span class="t-tag">Back Relief</span>
+            <span class="t-tag">Better Sleep</span>
+          </div>
+        </div>
+      </div>
+      <div class="t-slide">
+        <div class="t-card">
+          <div class="t-rating"><span class="t-score">4.8</span><span class="t-stars">★★★★★</span></div>
+          <p class="t-quote">"The scent is so calming and my skin looks noticeably smoother after just two weeks."</p>
+          <div class="t-user">
+            <span class="t-avatar" style="border-color:#c8a24a;color:#a3822f;">PS</span>
+            <span class="t-name">Priya S., 38 years</span>
+          </div>
+          <div class="t-tags">
+            <span class="t-tag">Glowing Skin</span>
+            <span class="t-tag">Great Scent</span>
+          </div>
+        </div>
+      </div>
+      <div class="t-slide">
+        <div class="t-card">
+          <div class="t-rating"><span class="t-score">5.0</span><span class="t-stars">★★★★★</span></div>
+          <p class="t-quote">"Post-workout recovery used to take days. Now I'm back at the gym within 24 hours."</p>
+          <div class="t-user">
+            <span class="t-avatar" style="border-color:#6b7a70;color:#4d5850;">TW</span>
+            <span class="t-name">Tom W., 62 years</span>
+          </div>
+          <div class="t-tags">
+            <span class="t-tag">Faster Recovery</span>
+            <span class="t-tag">Joint Support</span>
+          </div>
+        </div>
+      </div>
+      <div class="t-slide">
+        <div class="t-card">
+          <div class="t-rating"><span class="t-score">4.9</span><span class="t-stars">★★★★★</span></div>
+          <p class="t-quote">"Less swelling in my knees by day 10. I finally feel like I can keep up with my grandkids."</p>
+          <div class="t-user">
+            <span class="t-avatar" style="border-color:#bf5a34;color:#bf5a34;">LH</span>
+            <span class="t-name">Linda H., 47 years</span>
+          </div>
+          <div class="t-tags">
+            <span class="t-tag">Reduced Swelling</span>
+            <span class="t-tag">More Mobility</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-dots" id="testimonialDots">
+      <span class="dot active" onclick="goToTestimonial(0)"></span>
+      <span class="dot" onclick="goToTestimonial(1)"></span>
+      <span class="dot" onclick="goToTestimonial(2)"></span>
+      <span class="dot" onclick="goToTestimonial(3)"></span>
+      <span class="dot" onclick="goToTestimonial(4)"></span>
+    </div>
+  </div>
+
+  <!-- Marquee -->
+  <div class="marquee-wrap">
+    <div class="marquee-track" id="marqueeTrack">
+      <span class="item">Helps Joints</span><span class="sep">●</span>
+      <span class="item">Better Sleep</span><span class="sep">●</span>
+      <span class="item">Melts Tension</span><span class="sep">●</span>
+      <span class="item">Releases Stress</span><span class="sep">●</span>
+      <span class="item">Helps Joints</span><span class="sep">●</span>
+      <span class="item">Better Sleep</span><span class="sep">●</span>
+      <span class="item">Melts Tension</span><span class="sep">●</span>
+      <span class="item">Releases Stress</span><span class="sep">●</span>
+    </div>
+  </div>
+
+  <!-- Video reels -->
+  <div class="reels-header">
+    <h2 class="section-title">See It In Action</h2>
+    <div class="reel-arrows">
+      <button class="reel-arrow prev" onclick="moveReel(-1)" aria-label="Previous video">
+        <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="reel-arrow next" onclick="moveReel(1)" aria-label="Next video">
+        <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="reels-track" id="reelsTrack">
+    <div class="reel-card" onclick="toggleMute(this)">
+      <video src="videos/video1.mp4" poster="images/ChatGPT_Image_Aug_8__2026__12_47_52_PM.png" autoplay muted loop playsinline></video>
+      <div class="reel-shade"></div>
+      <div class="mute-btn">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M22 9l-6 6M16 9l6 6"/></svg>
+      </div>
+    </div>
+    <div class="reel-card" onclick="toggleMute(this)">
+      <video src="videos/video2.mp4" poster="images/Therapi_Daily_Relief_Massage_Oil_Ad.png" autoplay muted loop playsinline></video>
+      <div class="reel-shade"></div>
+      <div class="mute-btn">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M22 9l-6 6M16 9l6 6"/></svg>
+      </div>
+    </div>
+    <div class="reel-card" onclick="toggleMute(this)">
+      <video src="videos/video3.mp4" poster="images/ChatGPT_Image_Aug_6__2026__04_51_29_PM.png" autoplay muted loop playsinline></video>
+      <div class="reel-shade"></div>
+      <div class="mute-btn">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M22 9l-6 6M16 9l6 6"/></svg>
+      </div>
+    </div>
+    <div class="reel-card" onclick="toggleMute(this)">
+      <video src="videos/video4.mp4" poster="images/buy_two-removebg-preview.png" autoplay muted loop playsinline></video>
+      <div class="reel-shade"></div>
+      <div class="mute-btn">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M22 9l-6 6M16 9l6 6"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <h2 class="section-title">Frequently Asked Questions</h2>
+  <div class="faq-wrap" id="faqWrap">
+    <div class="faq-item open">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="q-text">How often should I use Daily Relief?</span>
+        <span class="faq-icon"></span>
+      </button>
+      <div class="faq-a" style="max-height:120px;">
+        <p>Massage a few drops into the affected area up to 3 times a day, or as part of a nightly wind-down ritual. Most people notice a difference within the first 1–2 weeks of daily use.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="q-text">Is this oil suitable for sensitive skin?</span>
+        <span class="faq-icon"></span>
+      </button>
+      <div class="faq-a">
+        <p>Yes. Daily Relief is formulated with natural, gentle botanicals and is free from parabens and synthetic dyes. As with any topical product, we recommend a small patch test before your first full use.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="q-text">How long does one bottle last?</span>
+        <span class="faq-icon"></span>
+      </button>
+      <div class="faq-a">
+        <p>A single 2 fl oz bottle lasts approximately 3–4 weeks with daily use, depending on how many areas you're treating.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="q-text">When will my order arrive?</span>
+        <span class="faq-icon"></span>
+      </button>
+      <div class="faq-a">
+        <p>Orders ship from the US within 1–2 business days. Most customers receive their order within 4–6 business days of purchase.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="q-text">What if it doesn't work for me?</span>
+        <span class="faq-icon"></span>
+      </button>
+      <div class="faq-a">
+        <p>We back every order with a 30-day money-back guarantee. If you're not satisfied, reach out to our support team for a full refund — no questions asked.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Method / benefits reinforcement -->
+  <div class="method-wrap">
+    <h2 class="section-title" style="margin-top:30px;">The Natural Way to<br>Everyday Relief</h2>
+    <div class="method-list">
+      <div class="method-item faq-item">
+        <button class="method-q" onclick="toggleFaq(this)">
+          <div class="method-thumb" style="background:var(--clay);">
+            <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1 3-2 4-2 7a4 4 0 0 0 8 0c0-1.5-1-2.5-1-2.5S18 8 18 11a6 6 0 0 1-12 0C6 6 10 5 12 2z"/></svg>
+          </div>
+          <div class="method-info">
+            <div class="method-title">Warm &amp; Massage</div>
+            <div class="method-sub">Awaken Sore Muscles</div>
+          </div>
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-a">
+          <p>Warm a few drops between your palms and massage into the area using firm, circular motions. This gentle warmth helps increase local circulation, prepping tight, sore muscles for relief.</p>
+        </div>
+      </div>
+
+      <div class="method-item faq-item">
+        <button class="method-q" onclick="toggleFaq(this)">
+          <div class="method-thumb" style="background:var(--gold);">
+            <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c2-3 4-3 6 0s4 3 6 0 4-3 6 0"/><path d="M3 18c2-3 4-3 6 0s4 3 6 0 4-3 6 0"/></svg>
+          </div>
+          <div class="method-info">
+            <div class="method-title">Absorb &amp; Soothe</div>
+            <div class="method-sub">Encourage Deep Comfort</div>
+          </div>
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-a">
+          <p>Our botanical blend absorbs quickly beneath the skin, working past the surface to ease tension and encourage a lasting sense of comfort throughout the day.</p>
+        </div>
+      </div>
+
+      <div class="method-item faq-item">
+        <button class="method-q" onclick="toggleFaq(this)">
+          <div class="method-thumb" style="background:var(--forest);">
+            <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <div class="method-info">
+            <div class="method-title">Relieve &amp; Restore</div>
+            <div class="method-sub">Release Tension, Renew Movement</div>
+          </div>
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-a">
+          <p>With consistent use, everyday stiffness and puffiness begin to fade — helping you move, stretch, and rest easier, day after day.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider-line"></div>
+
+  <!-- Reviews with gender filter -->
+  <div class="trusted-row">
+    <span class="stars-icons">★★★★★</span> Trusted by thousands of customers
+  </div>
+  <h2 class="section-title">Relief You Can Feel,<br>Results You Can See</h2>
+
+  <div class="gender-toggle">
+    <button class="gender-btn active" data-gender="women" onclick="filterGenderReviews('women', this)">Women Reviews</button>
+    <button class="gender-btn" data-gender="men" onclick="filterGenderReviews('men', this)">Men Reviews</button>
+  </div>
+
+  <div class="gender-reviews" id="genderReviews">
+    <div class="g-review" data-gender="women">
+      <div class="g-rating"><span>5/5</span><span class="stars">★★★★★</span></div>
+      <p>"I purchased this because my ankles were swollen and I'd been dealing with allergies since March. After a few weeks, my joints feel so much less puffy going to work and coming home. I definitely recommend it to anyone dealing with everyday stiffness."</p>
+      <div class="g-meta"><b>Shauna B., 37 years</b><span class="sep">|</span><span class="verified"><svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Verified Buyer</span></div>
+    </div>
+    <div class="g-review" data-gender="women">
+      <div class="g-rating"><span>5/5</span><span class="stars">★★★★★</span></div>
+      <p>"My shoulders used to lock up after every desk day. Two weeks of using this every evening and I actually look forward to my massage ritual. My skin feels nourished too."</p>
+      <div class="g-meta"><b>Renee T., 44 years</b><span class="sep">|</span><span class="verified"><svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Verified Buyer</span></div>
+    </div>
+    <div class="g-review" data-gender="women">
+      <div class="g-rating"><span>4.9/5</span><span class="stars">★★★★★</span></div>
+      <p>"I was skeptical about another 'massage oil' but the difference in my lower back stiffness after two weeks was honestly noticeable. Lovely scent too, not overpowering."</p>
+      <div class="g-meta"><b>Dana K., 52 years</b><span class="sep">|</span><span class="verified"><svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Verified Buyer</span></div>
+    </div>
+
+    <div class="g-review" data-gender="men" style="display:none;">
+      <div class="g-rating"><span>5/5</span><span class="stars">★★★★★</span></div>
+      <p>"I purchased the item because my knees were swollen and I've been dealing with joint pain since last winter. After a few weeks, my knees feel so much less stiff heading into work and coming home. I use the drops before the gym and before bed. I'd recommend this to anyone dealing with everyday soreness."</p>
+      <div class="g-meta"><b>Shamir B., 37 years</b><span class="sep">|</span><span class="verified"><svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Verified Buyer</span></div>
+    </div>
+    <div class="g-review" data-gender="men" style="display:none;">
+      <div class="g-rating"><span>5/5</span><span class="stars">★★★★★</span></div>
+      <p>"Post-workout recovery used to take me days. Now I'm back at the gym within 24 hours and my shoulders don't lock up anymore. Part of my routine for good."</p>
+      <div class="g-meta"><b>Tom W., 62 years</b><span class="sep">|</span><span class="verified"><svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Verified Buyer</span></div>
+    </div>
+    <div class="g-review" data-gender="men" style="display:none;">
+      <div class="g-rating"><span>4.8/5</span><span class="stars">★★★★★</span></div>
+      <p>"My lower back pain after long shifts finally feels manageable. This oil is part of my nightly routine now, and I sleep a lot better for it."</p>
+      <div class="g-meta"><b>James R., 54 years</b><span class="sep">|</span><span class="verified"><svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Verified Buyer</span></div>
+    </div>
+  </div>
+
+  <!-- Tutorial: 30-Second Relief Ritual -->
+  <div class="tutorial-wrap">
+    <h2 class="section-title">The 30-Second<br>Relief Ritual</h2>
+    <p class="tutorial-intro">Simple, fast, and completely mess-free — no timers or guesswork required.</p>
+
+    <div class="tutorial-carousel" id="tutorialCarousel">
+      <div class="tutorial-slide">
+        <div class="tutorial-card">
+          <span class="tutorial-step-pill">Step 1</span>
+          <div class="tutorial-img-wrap"><img src="images/step1.png" alt="Warming the massage oil between palms"></div>
+        </div>
+        <h3 class="tutorial-heading">Warm It Between Your Palms</h3>
+        <p class="tutorial-desc">Add 2–3 drops to your palms and rub together for a few seconds. This <b>gently warms the oil</b>, helping it glide smoothly once applied.</p>
+      </div>
+
+      <div class="tutorial-slide">
+        <div class="tutorial-card">
+          <span class="tutorial-step-pill">Step 2</span>
+          <div class="tutorial-img-wrap"><img src="images/step2.png" alt="Massaging oil into the skin"></div>
+        </div>
+        <h3 class="tutorial-heading">Massage in Circular Motions</h3>
+        <p class="tutorial-desc">Apply to the area using <b>firm, circular strokes</b> for 30–60 seconds. This encourages absorption and gets blood flowing to tired muscles.</p>
+      </div>
+
+      <div class="tutorial-slide">
+        <div class="tutorial-card">
+          <span class="tutorial-step-pill">Step 3</span>
+          <div class="tutorial-img-wrap"><img src="images/step3.png" alt="Targeting tension areas"></div>
+        </div>
+        <h3 class="tutorial-heading">Target Your Trouble Spots</h3>
+        <p class="tutorial-desc">Spend extra time on <b>stiff or swollen areas</b> — shoulders, lower back, knees — wherever the day has taken its toll.</p>
+      </div>
+
+      <div class="tutorial-slide">
+        <div class="tutorial-card">
+          <span class="tutorial-step-pill">Step 4</span>
+          <div class="tutorial-img-wrap"><img src="images/step4.png" alt="Making it a daily ritual"></div>
+        </div>
+        <h3 class="tutorial-heading">Repeat Daily for Best Results</h3>
+        <p class="tutorial-desc">Use once or twice a day, morning and night. <b>Consistency is key</b> — most people notice a difference within the first week.</p>
+      </div>
+    </div>
+
+    <div class="tutorial-nav">
+      <button onclick="moveTutorial(-1)" aria-label="Previous step">
+        <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button onclick="moveTutorial(1)" aria-label="Next step">
+        <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+    <div class="carousel-dots" id="tutorialDots">
+      <span class="dot active" onclick="goToTutorial(0)"></span>
+      <span class="dot" onclick="goToTutorial(1)"></span>
+      <span class="dot" onclick="goToTutorial(2)"></span>
+      <span class="dot" onclick="goToTutorial(3)"></span>
+    </div>
+  </div>
+
+  <!-- Proven results / stats -->
+  <div class="results-wrap">
+    <h2 class="section-title" style="text-align:left;margin:0;">Proven Benefits.<br>Backed by Results.</h2>
+    <div class="results-grid">
+      <div class="stat-card">
+        <div class="stat-top">
+          <div class="stat-num-row"><span class="stat-num" data-target="93">0</span><span class="stat-percent">%</span></div>
+          <div class="stat-arrow-circle"><svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></div>
+        </div>
+        <p>said they felt less stiff within the first week</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-top">
+          <div class="stat-num-row"><span class="stat-num" data-target="91">0</span><span class="stat-percent">%</span></div>
+          <div class="stat-arrow-circle"><svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></div>
+        </div>
+        <p>said their skin looked clearer and more refreshed</p>
+      </div>
+      <div class="photo-card">
+        <img src="images/old_family.avif" alt="Customer photo">
+      </div>
+      <div class="stat-card">
+        <div class="stat-top">
+          <div class="stat-num-row"><span class="stat-num" data-target="95">0</span><span class="stat-percent">%</span></div>
+          <div class="stat-arrow-circle"><svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></div>
+        </div>
+        <p>reported improved circulation and energy</p>
+      </div>
+    </div>
+    <div class="quote-box">
+      <p>"After a week, my shoulders finally felt loose and I could sleep through the night."</p>
+      <div class="quote-author">
+        <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg>
+        Mike K., 33 years
+      </div>
+    </div>
+  </div>
+
+  <!-- Weekly Journey -->
+  <div class="journey-section">
+    <div class="journey-hero">
+      <img src="images/senior_woman.png" alt="Woman stretching outdoors, feeling relief">
+    </div>
+    <div class="journey-content">
+      <h2 class="journey-title">Your Daily Relief Journey</h2>
+      <p class="journey-sub">Real, gentle progress, not quick fixes.</p>
+
+      <div class="journey-timeline">
+        <div class="week-item">
+          <div class="week-marker">
+            <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          </div>
+          <div class="week-body">
+            <div class="week-title">Week 1: Stiffness Starts to Ease</div>
+            <ul class="week-bullets">
+              <li>Muscles feel noticeably looser</li>
+              <li>Everyday movement feels smoother</li>
+            </ul>
+            <div class="week-stat"><b>93% of customers</b> noticed less stiffness within the first week</div>
+          </div>
+        </div>
+
+        <div class="week-item">
+          <div class="week-marker">
+            <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          </div>
+          <div class="week-body">
+            <div class="week-title">Week 2: Notice the Relief</div>
+            <ul class="week-bullets">
+              <li>Swelling and puffiness begin to reduce</li>
+              <li>Energy returns, tension starts to lift</li>
+            </ul>
+            <div class="week-stat"><b>91% of customers</b> reported feeling lighter and more energized by Week 2</div>
+          </div>
+        </div>
+
+        <div class="week-item">
+          <div class="week-marker">
+            <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          </div>
+          <div class="week-body">
+            <div class="week-title">Week 3: Comfort from Within</div>
+            <ul class="week-bullets">
+              <li>Skin looks clearer and more radiant</li>
+              <li>Mood, clarity, and daily comfort feel stable</li>
+            </ul>
+            <div class="week-stat"><b>91% of customers</b> saw visible improvements in skin tone and comfort</div>
+          </div>
+        </div>
+
+        <div class="week-item">
+          <div class="week-marker">
+            <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          </div>
+          <div class="week-body">
+            <div class="week-title">Week 4: Steady, Lasting Balance</div>
+            <ul class="week-bullets">
+              <li>Consistent comfort and mobility</li>
+              <li>Body feels looser and less inflamed</li>
+            </ul>
+            <div class="week-stat"><b>95% of customers</b> felt overall improvement with consistent use</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comparison table -->
+  <div class="compare-wrap">
+    <h2 class="section-title" style="text-align:left;margin:0 0 4px;">See the Difference<br>for Yourself</h2>
+
+    <div class="compare-header">
+      <div></div>
+      <div class="brand-col">
+        <img src="images/buy_one-removebg-preview.png" alt="Therapi bottle">
+        <span>Therapi</span>
+      </div>
+      <div class="other-col">Other<br>brands</div>
+    </div>
+
+    <div class="compare-row first-row">
+      <div class="label">Supports Joint &amp; Muscle Comfort</div>
+      <div class="therapi-cell"><div class="check-badge"><svg viewBox="0 0 24 24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div></div>
+      <div class="other-cell"><div class="x-badge"><svg viewBox="0 0 24 24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></div></div>
+    </div>
+    <div class="compare-row">
+      <div class="label">Pure, Plant-Based Formula</div>
+      <div class="therapi-cell"><div class="check-badge"><svg viewBox="0 0 24 24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div></div>
+      <div class="other-cell"><div class="x-badge"><svg viewBox="0 0 24 24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></div></div>
+    </div>
+    <div class="compare-row">
+      <div class="label">Fast-Absorbing, Non-Greasy</div>
+      <div class="therapi-cell"><div class="check-badge"><svg viewBox="0 0 24 24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div></div>
+      <div class="other-cell"><div class="x-badge"><svg viewBox="0 0 24 24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></div></div>
+    </div>
+    <div class="compare-row">
+      <div class="label">Third-Party Tested</div>
+      <div class="therapi-cell"><div class="check-badge"><svg viewBox="0 0 24 24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div></div>
+      <div class="other-cell"><div class="x-badge"><svg viewBox="0 0 24 24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></div></div>
+    </div>
+    <div class="compare-row">
+      <div class="label">Free From Synthetic Fragrance</div>
+      <div class="therapi-cell"><div class="check-badge"><svg viewBox="0 0 24 24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div></div>
+      <div class="other-cell"><div class="x-badge"><svg viewBox="0 0 24 24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></div></div>
+    </div>
+    <div class="compare-row last-row">
+      <div class="label">Real, Noticeable Results</div>
+      <div class="therapi-cell"><div class="check-badge"><svg viewBox="0 0 24 24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div></div>
+      <div class="other-cell"><div class="x-badge"><svg viewBox="0 0 24 24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></div></div>
+    </div>
+  </div>
+
+  <!-- 5 Reasons carousel -->
+  <div class="reasons-wrap">
+    <h2 class="section-title">5 Reasons Why Thousands<br>Choose Therapi</h2>
+    <p class="tutorial-intro">Real relief. Clean ingredients. Gentle daily ritual.</p>
+
+    <div class="reasons-carousel" id="reasonsCarousel">
+      <div class="reason-slide">
+        <div class="reason-card">
+          <div class="reason-img-wrap">
+            <img src="images/senior_woman.png" alt="Woman applying Therapi oil to her shoulder">
+            <span class="reason-pill">Reason 1</span>
+          </div>
+          <div class="reason-content">
+            <h3 class="reason-heading">Eases Stiffness From Within</h3>
+            <p class="reason-desc">Unlike typical massage oils, Daily Relief supports deep tissue comfort to help your muscles release tension, reduce swelling, and move more freely.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="reason-slide">
+        <div class="reason-card">
+          <div class="reason-img-wrap">
+            <img src="images/therapi_ad2.png" alt="Therapi Daily Relief bottle" style="object-fit:contain;background:var(--cream-2);">
+            <span class="reason-pill">Reason 2</span>
+          </div>
+          <div class="reason-content">
+            <h3 class="reason-heading">Pure, Plant-Based Ingredients</h3>
+            <p class="reason-desc">A clean blend of arnica, eucalyptus, and botanical oils — no synthetic fillers, parabens, or artificial fragrance.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="reason-slide">
+        <div class="reason-card">
+          <div class="reason-img-wrap">
+            <img src="images/step2.png" alt="Three bottles of Therapi Daily Relief" style="object-fit:contain;background:var(--cream-2);">
+            <span class="reason-pill">Reason 3</span>
+          </div>
+          <div class="reason-content">
+            <h3 class="reason-heading">Fast-Absorbing, Non-Greasy Formula</h3>
+            <p class="reason-desc">Soaks in quickly without leaving a heavy residue — so you can get back to your day without sticky hands or stained clothing.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="reason-slide">
+        <div class="reason-card">
+          <div class="reason-img-wrap">
+            <img src="images/step1.png" alt="Third-party testing placeholder">
+            <span class="reason-pill">Reason 4</span>
+          </div>
+          <div class="reason-content">
+            <h3 class="reason-heading">Third-Party Tested &amp; Trusted</h3>
+            <p class="reason-desc">Every batch is independently tested for purity and potency, so you know exactly what you're putting on your skin.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="reason-slide">
+        <div class="reason-card">
+          <div class="reason-img-wrap">
+            <img src="images/step4.png" alt="Customer results placeholder">
+            <span class="reason-pill">Reason 5</span>
+          </div>
+          <div class="reason-content">
+            <h3 class="reason-heading">Real, Noticeable Results</h3>
+            <p class="reason-desc">Thousands of customers report real relief within the first two weeks — not just a promise, but a ritual that works.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reasons-nav">
+      <button onclick="moveReasons(-1)" aria-label="Previous reason">
+        <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button onclick="moveReasons(1)" aria-label="Next reason">
+        <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+    <div class="carousel-dots" id="reasonsDots">
+      <span class="dot active" onclick="goToReason(0)"></span>
+      <span class="dot" onclick="goToReason(1)"></span>
+      <span class="dot" onclick="goToReason(2)"></span>
+      <span class="dot" onclick="goToReason(3)"></span>
+      <span class="dot" onclick="goToReason(4)"></span>
+    </div>
+  </div>
+
+  <!-- 30-Day Guarantee banner (placeholder image) -->
+  <div class="guarantee-banner-wrap">
+    <img src="images/30day.png" alt="30-Day Money Back Guarantee — feel the difference in 30 days or we'll make it right">
+  </div>
+
+  <!-- Real transformations testimonial carousel -->
+  <div class="transform-wrap">
+    <h2 class="section-title">Real Transformations<br>Start Here</h2>
+
+    <div class="transform-carousel" id="transformCarousel">
+      <div class="transform-slide">
+        <div class="transform-card">
+          <div class="transform-video-wrap" onclick="toggleTransformMute(this)">
+            <video class="transform-photo" src="videos/video1.mp4" poster="images/image12.png" autoplay muted loop playsinline></video>
+            <div class="mute-btn">
+              <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M22 9l-6 6M16 9l6 6"/></svg>
+            </div>
+          </div>
+          <div class="transform-content">
+            <div class="transform-stars">★★★★★</div>
+            <h3 class="transform-heading">Reduced Swelling and Greater Comfort</h3>
+            <p class="transform-quote">"I've been using this product for 1 week and can feel the difference in my body already. Swelling in my feet and legs is decreasing. This brings me comfort and relief."</p>
+            <div class="transform-meta">
+              <span class="transform-name">Rose O., 41 years</span>
+              <span class="transform-verified">
+                <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                Verified Customer
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="transform-slide">
+        <div class="transform-card">
+          <div class="transform-video-wrap" onclick="toggleTransformMute(this)">
+            <video class="transform-photo" src="videos/video2.mp4" poster="images/image13.png" autoplay muted loop playsinline></video>
+            <div class="mute-btn">
+              <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M22 9l-6 6M16 9l6 6"/></svg>
+            </div>
+          </div>
+          <div class="transform-content">
+            <div class="transform-stars">★★★★★</div>
+            <h3 class="transform-heading">Two Weeks In, Real Relief</h3>
+            <p class="transform-quote">"My lower back stiffness is finally easing up after two weeks of nightly use. I actually look forward to my evening ritual now."</p>
+            <div class="transform-meta">
+              <span class="transform-name">Carlos M., 49 years</span>
+              <span class="transform-verified">
+                <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                Verified Customer
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="transform-slide">
+        <div class="transform-card">
+          <div class="transform-video-wrap" onclick="toggleTransformMute(this)">
+            <video class="transform-photo" src="videos/video3.mp4" poster="images/image14.png" autoplay muted loop playsinline></video>
+            <div class="mute-btn">
+              <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M22 9l-6 6M16 9l6 6"/></svg>
+            </div>
+          </div>
+          <div class="transform-content">
+            <div class="transform-stars">★★★★★</div>
+            <h3 class="transform-heading">Visible De-Puffing, Softer Skin</h3>
+            <p class="transform-quote">"The puffiness around my ankles has visibly gone down, and my skin feels so much softer too. Such a simple addition to my routine."</p>
+            <div class="transform-meta">
+              <span class="transform-name">Ines P., 36 years</span>
+              <span class="transform-verified">
+                <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                Verified Customer
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="transform-nav">
+      <button onclick="moveTransform(-1)" aria-label="Previous transformation">
+        <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button onclick="moveTransform(1)" aria-label="Next transformation">
+        <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+    <div class="carousel-dots" id="transformDots">
+      <span class="dot active" onclick="goToTransform(0)"></span>
+      <span class="dot" onclick="goToTransform(1)"></span>
+      <span class="dot" onclick="goToTransform(2)"></span>
+    </div>
+  </div>
+
+  <!-- Stock up / second pay section -->
+  <div class="stockup-wrap" id="stockupSection">
+    <h2 class="stockup-title">Stock up. Save more.</h2>
+    <p class="stockup-sub">Your wellness matters — the daily ritual your muscles, joints, and skin have been waiting for.</p>
+
+    <div class="tiers" id="tiers2">
+      <div class="tier" data-tier="one" data-now="29.99" data-was="39.99" data-label="Buy One">
+        <div class="radio"></div>
+        <div class="thumb"><img src="images/buy_one-removebg-preview.png" alt="One bottle of Therapi Daily Relief"></div>
+        <div class="info">
+          <div class="name">Buy One</div>
+          <div class="sub">$29.99 per bottle</div>
+        </div>
+        <div class="price-col"><span class="now">$29.99</span><span class="was">$39.99</span></div>
+      </div>
+
+      <div class="tier selected" data-tier="two" data-now="59.99" data-was="79.99" data-label="Buy 2, Get 1 Free">
+        <span class="badge">Most Popular</span>
+        <div class="radio"></div>
+        <div class="thumb"><img src="images/buy_two-removebg-preview.png" alt="Three bottles of Therapi Daily Relief"></div>
+        <div class="info">
+          <div class="name">Buy 2, Get 1 Free</div>
+          <div class="sub">$19.99 per bottle</div>
+        </div>
+        <div class="price-col"><span class="now">$59.99</span><span class="was">$79.99</span></div>
+      </div>
+
+      <div class="tier" data-tier="three" data-now="89.99" data-was="119.99" data-label="Buy 3, Get 2 Free">
+        <span class="badge" style="background:var(--forest);">Free Shipping</span>
+        <div class="radio"></div>
+        <div class="thumb"><img src="images/buy_three-removebg-preview.png" alt="Five bottles of Therapi Daily Relief"></div>
+        <div class="info">
+          <div class="name">Buy 3, Get 2 Free</div>
+          <div class="sub">$17.99 per bottle</div>
+        </div>
+        <div class="price-col"><span class="now">$89.99</span><span class="was">$119.99</span></div>
+      </div>
+    </div>
+
+    <div class="ship-row">
+      <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="15" height="12" rx="2"/><path d="M16 10h3.5a1.5 1.5 0 0 1 1.32.79L23 14v4a1 1 0 0 1-1 1h-1.5"/><circle cx="6" cy="19.5" r="1.75"/><circle cx="18" cy="19.5" r="1.75"/></svg>
+      Ready to ship — arrives by <span class="date" id="shipDate2">Aug 14</span>
+    </div>
+
+    <div class="stockup-recap">
+      <div class="sticky-price">
+        <span class="now" id="barNow2">$59.99</span>
+        <span class="was" id="barWas2">$79.99</span>
+      </div>
+      <div class="sticky-tag" id="barTag2">Buy 2, Get 1 Free</div>
+    </div>
+
+    <button class="add-cart-btn" onclick="addToCart('cartBtnLabel3')">
+      <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      <span id="cartBtnLabel3">Add To Cart</span>
+    </button>
+
+    <div class="money-back">
+      <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg>
+      30-Day Money Back Guarantee
+    </div>
+
+    <div class="stockup-refill">Refills Every 30 Days &nbsp;|&nbsp; Cancel Anytime</div>
+  </div>
+
+  <!-- Closing footer -->
+  <div class="site-footer">
+    <div class="footer-trustline">Free returns · Ships from the US · Cruelty-free &amp; made with natural botanicals</div>
+
+    <div class="footer-logo">
+      <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1 3-2 4-2 7a4 4 0 0 0 8 0c0-1.5-1-2.5-1-2.5S18 8 18 11a6 6 0 0 1-12 0C6 6 10 5 12 2z"/></svg>
+      THERAPI
+    </div>
+
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4>Menu</h4>
+        <a href="#">Track Order</a>
+        <a href="#">Contact</a>
+        <a href="#">Blogs</a>
+      </div>
+      <div class="footer-col">
+        <h4>Policies</h4>
+        <a href="#">Refund Policy</a>
+        <a href="#">Shipping Policy</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Cancellation Policy</a>
+      </div>
+    </div>
+
+    <div class="footer-newsletter">
+      <h4>Let's Stay Connected</h4>
+      <p>Be first to know about new products and special savings.</p>
+      <form class="footer-form" onsubmit="return handleNewsletterSubmit(event)">
+        <input type="email" placeholder="Your Email" required>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+
+    <div class="footer-address">
+      <b>Therapi</b><br>
+      1200 19th St NW<br>
+      Washington, DC 20036<br>
+      United States
+    </div>
+
+    <div class="footer-legal">
+      <p>* These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.</p>
+      <p>* Individual results may vary. Testimonials and reviews reflect individual experiences and are not guaranteed outcomes.</p>
+      <p>Consult your healthcare provider before starting any new topical treatment, especially if you are pregnant, nursing, or have a medical condition.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- Sticky Add to Cart bar -->
+<div class="sticky-bar" id="stickyBar">
+
+  <div class="sticky-top">
+    <div>
+      <div class="sticky-price">
+        <span class="now" id="barNow">$59.99</span>
+        <span class="was" id="barWas">$79.99</span>
+      </div>
+      <div class="sticky-tag" id="barTag">Buy 2, Get 1 Free</div>
+    </div>
+  </div>
+  <button class="add-cart-btn" onclick="addToCart()">
+    <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+    <span id="cartBtnLabel">Add To Cart</span>
+  </button>
+  <div class="money-back">
+    <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg>
+    30-Day Money Back Guarantee
+  </div>
+</div>
+
+<!-- Nutrition / Ingredients modal -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOnOverlay(event)">
+  <div class="modal">
+    <h3>Ingredients &amp; Info <span class="close" onclick="closeModal()">✕</span></h3>
+    <div class="ingredient-row"><span>Sweet Almond Oil</span><span>Base carrier oil</span></div>
+    <div class="ingredient-row"><span>Arnica Extract</span><span>Soothes muscles</span></div>
+    <div class="ingredient-row"><span>Menthol &amp; Camphor</span><span>Cooling relief</span></div>
+    <div class="ingredient-row"><span>Vitamin E</span><span>Skin nourishment</span></div>
+    <div class="ingredient-row"><span>Eucalyptus Oil</span><span>Deep tissue support</span></div>
+    <div class="ingredient-row"><span>Rosemary Oil</span><span>Circulation support</span></div>
+    <p style="font-size:12px;color:var(--muted);margin-top:14px;line-height:1.6;">
+      2 fl oz / 59 mL. For external use only. Massage into affected area up to 3x daily.
+      Not evaluated by the FDA. Not intended to diagnose, treat, cure, or prevent any disease.
+    </p>
+  </div>
+</div>
+
+<script>
+  // ---- Countdown timer ----
+  let totalSeconds = 1*3600 + 13*60 + 13;
+  function tick(){
+    if(totalSeconds <= 0){ totalSeconds = 3*3600; }
+    totalSeconds--;
+    const h = Math.floor(totalSeconds/3600);
+    const m = Math.floor((totalSeconds%3600)/60);
+    const s = totalSeconds%60;
+    document.getElementById('hh').textContent = String(h).padStart(2,'0');
+    document.getElementById('mm').textContent = String(m).padStart(2,'0');
+    document.getElementById('ss').textContent = String(s).padStart(2,'0');
+  }
+  setInterval(tick, 1000);
+
+  // ---- Carousel ----
+  const carousel = document.getElementById('carousel');
+  const dots = document.querySelectorAll('#carouselDots .dot');
+  const slideCount = dots.length;
+
+  function setActiveDot(i){
+    dots.forEach((d, idx) => d.classList.toggle('active', idx === i));
+  }
+  function goToSlide(i){
+    carousel.scrollTo({ left: carousel.clientWidth * i, behavior: 'smooth' });
+    setActiveDot(i);
+  }
+  function moveSlide(dir){
+    const current = Math.round(carousel.scrollLeft / carousel.clientWidth);
+    const next = Math.min(Math.max(current + dir, 0), slideCount - 1);
+    goToSlide(next);
+  }
+  let scrollTimeout;
+  carousel.addEventListener('scroll', () => {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      const i = Math.round(carousel.scrollLeft / carousel.clientWidth);
+      setActiveDot(i);
+    }, 80);
+  });
+
+  // ---- Sold progress bar animates in ----
+  window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => { document.getElementById('soldFill').style.width = '93%'; }, 300);
+  });
+
+  // ---- Ship date (4 days from "today") ----
+  (function(){
+    const today = new Date(2026, 7, 10); // Aug 10, 2026
+    today.setDate(today.getDate() + 4);
+    const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    const label = months[today.getMonth()] + " " + today.getDate();
+    document.getElementById('shipDate').textContent = label;
+    const shipDate2 = document.getElementById('shipDate2');
+    if(shipDate2){ shipDate2.textContent = label; }
+  })();
+
+  // ---- Tier selection updates sticky bar + stock-up recap (both tier groups stay in sync) ----
+  const tiers = document.querySelectorAll('.tier');
+  const barNow = document.getElementById('barNow');
+  const barWas = document.getElementById('barWas');
+  const barTag = document.getElementById('barTag');
+  const barNow2 = document.getElementById('barNow2');
+  const barWas2 = document.getElementById('barWas2');
+  const barTag2 = document.getElementById('barTag2');
+  const cartCount = document.getElementById('cartCount');
+  const qtyByTier = { one:1, two:3, three:5 };
+
+  tiers.forEach(t => {
+    t.addEventListener('click', () => {
+      const tierKey = t.dataset.tier;
+      tiers.forEach(o => {
+        o.classList.toggle('selected', o.dataset.tier === tierKey);
+      });
+      barNow.textContent = '$' + t.dataset.now;
+      barWas.textContent = '$' + t.dataset.was;
+      barTag.textContent = t.dataset.label;
+      if(barNow2){
+        barNow2.textContent = '$' + t.dataset.now;
+        barWas2.textContent = '$' + t.dataset.was;
+        barTag2.textContent = t.dataset.label;
+      }
+      cartCount.textContent = qtyByTier[tierKey];
+    });
+  });
+
+  function scrollToBar(){
+    document.getElementById('tiers').scrollIntoView({behavior:'smooth', block:'center'});
+  }
+
+  function addToCart(labelId){
+    const id = labelId || 'cartBtnLabel';
+    const btn = document.getElementById(id);
+    const original = btn.textContent;
+    btn.textContent = 'Added ✓';
+    setTimeout(() => { btn.textContent = original; }, 1400);
+  }
+
+  function handleNewsletterSubmit(e){
+    e.preventDefault();
+    const input = e.target.querySelector('input');
+    const btn = e.target.querySelector('button');
+    const original = btn.textContent;
+    btn.textContent = 'Subscribed ✓';
+    input.value = '';
+    setTimeout(() => { btn.textContent = original; }, 1800);
+    return false;
+  }
+
+  // ---- Transformations carousel ----
+  const transformCarousel = document.getElementById('transformCarousel');
+  const transformDots = document.querySelectorAll('#transformDots .dot');
+  const transformSlideCount = transformDots.length;
+
+  function setActiveTransformDot(i){
+    transformDots.forEach((d, idx) => d.classList.toggle('active', idx === i));
+  }
+  function goToTransform(i){
+    transformCarousel.scrollTo({ left: transformCarousel.clientWidth * i, behavior: 'smooth' });
+    setActiveTransformDot(i);
+  }
+  function moveTransform(dir){
+    const current = Math.round(transformCarousel.scrollLeft / transformCarousel.clientWidth);
+    const next = Math.min(Math.max(current + dir, 0), transformSlideCount - 1);
+    goToTransform(next);
+  }
+  let transformScrollTimeout;
+  transformCarousel.addEventListener('scroll', () => {
+    clearTimeout(transformScrollTimeout);
+    transformScrollTimeout = setTimeout(() => {
+      const i = Math.round(transformCarousel.scrollLeft / transformCarousel.clientWidth);
+      setActiveTransformDot(i);
+    }, 80);
+  });
+
+  function toggleTransformMute(wrap){
+    const video = wrap.querySelector('video');
+    const icon = wrap.querySelector('.mute-btn svg');
+    video.muted = !video.muted;
+    icon.innerHTML = video.muted
+      ? '<path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M22 9l-6 6M16 9l6 6"/>'
+      : '<path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/>';
+  }
+
+  // ---- FAQ / method accordion ----
+  function toggleFaq(btn){
+    const item = btn.closest('.faq-item');
+    const answer = item.querySelector('.faq-a');
+    const isOpen = item.classList.contains('open');
+    const scope = item.closest('.faq-wrap, .method-list') || document;
+
+    scope.querySelectorAll('.faq-item.open').forEach(openItem => {
+      if(openItem !== item){
+        openItem.classList.remove('open');
+        openItem.querySelector('.faq-a').style.maxHeight = null;
+      }
+    });
+
+    if(isOpen){
+      item.classList.remove('open');
+      answer.style.maxHeight = null;
+    } else {
+      item.classList.add('open');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+  }
+
+  // ---- Gender review filter ----
+  function filterGenderReviews(gender, btn){
+    document.querySelectorAll('.gender-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.g-review').forEach(card => {
+      card.style.display = (card.dataset.gender === gender) ? '' : 'none';
+    });
+  }
+
+  // ---- 5 Reasons carousel ----
+  const reasonsCarousel = document.getElementById('reasonsCarousel');
+  const reasonDots = document.querySelectorAll('#reasonsDots .dot');
+  const reasonSlideCount = reasonDots.length;
+
+  function setActiveReasonDot(i){
+    reasonDots.forEach((d, idx) => d.classList.toggle('active', idx === i));
+  }
+  function goToReason(i){
+    reasonsCarousel.scrollTo({ left: reasonsCarousel.clientWidth * i, behavior: 'smooth' });
+    setActiveReasonDot(i);
+  }
+  function moveReasons(dir){
+    const current = Math.round(reasonsCarousel.scrollLeft / reasonsCarousel.clientWidth);
+    const next = Math.min(Math.max(current + dir, 0), reasonSlideCount - 1);
+    goToReason(next);
+  }
+  let reasonScrollTimeout;
+  reasonsCarousel.addEventListener('scroll', () => {
+    clearTimeout(reasonScrollTimeout);
+    reasonScrollTimeout = setTimeout(() => {
+      const i = Math.round(reasonsCarousel.scrollLeft / reasonsCarousel.clientWidth);
+      setActiveReasonDot(i);
+    }, 80);
+  });
+
+  // ---- Tutorial carousel ----
+  const tutorialCarousel = document.getElementById('tutorialCarousel');
+  const tutDots = document.querySelectorAll('#tutorialDots .dot');
+  const tutSlideCount = tutDots.length;
+
+  function setActiveTutDot(i){
+    tutDots.forEach((d, idx) => d.classList.toggle('active', idx === i));
+  }
+  function goToTutorial(i){
+    tutorialCarousel.scrollTo({ left: tutorialCarousel.clientWidth * i, behavior: 'smooth' });
+    setActiveTutDot(i);
+  }
+  function moveTutorial(dir){
+    const current = Math.round(tutorialCarousel.scrollLeft / tutorialCarousel.clientWidth);
+    const next = Math.min(Math.max(current + dir, 0), tutSlideCount - 1);
+    goToTutorial(next);
+  }
+  let tutScrollTimeout;
+  tutorialCarousel.addEventListener('scroll', () => {
+    clearTimeout(tutScrollTimeout);
+    tutScrollTimeout = setTimeout(() => {
+      const i = Math.round(tutorialCarousel.scrollLeft / tutorialCarousel.clientWidth);
+      setActiveTutDot(i);
+    }, 80);
+  });
+
+  // ---- Animated stat counters ----
+  function animateStats(){
+    document.querySelectorAll('.stat-num').forEach(el => {
+      const target = parseInt(el.dataset.target, 10);
+      const duration = 1200;
+      const startTime = performance.now();
+      function step(ts){
+        const progress = Math.min((ts - startTime) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 2);
+        el.textContent = Math.floor(eased * target);
+        if(progress < 1){ requestAnimationFrame(step); }
+        else { el.textContent = target; }
+      }
+      requestAnimationFrame(step);
+    });
+  }
+  const resultsGrid = document.querySelector('.results-grid');
+  if(resultsGrid){
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          animateStats();
+          statsObserver.disconnect();
+        }
+      });
+    }, { threshold: 0.35 });
+    statsObserver.observe(resultsGrid);
+  }
+
+  // ---- Video reels ----
+  const reelsTrack = document.getElementById('reelsTrack');
+  function moveReel(dir){
+    const card = reelsTrack.querySelector('.reel-card');
+    const step = card.offsetWidth + 10; // width + gap
+    reelsTrack.scrollBy({ left: step * dir, behavior: 'smooth' });
+  }
+  function toggleMute(card){
+    const video = card.querySelector('video');
+    const icon = card.querySelector('.mute-btn svg');
+    video.muted = !video.muted;
+    icon.innerHTML = video.muted
+      ? '<path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M22 9l-6 6M16 9l6 6"/>'
+      : '<path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/>';
+  }
+  const testimonialCarousel = document.getElementById('testimonialCarousel');
+  const tDots = document.querySelectorAll('#testimonialDots .dot');
+  const tSlideCount = tDots.length;
+
+  function setActiveTDot(i){
+    tDots.forEach((d, idx) => d.classList.toggle('active', idx === i));
+  }
+  function goToTestimonial(i){
+    testimonialCarousel.scrollTo({ left: testimonialCarousel.clientWidth * i, behavior: 'smooth' });
+    setActiveTDot(i);
+  }
+  function moveTestimonial(dir){
+    const current = Math.round(testimonialCarousel.scrollLeft / testimonialCarousel.clientWidth);
+    const next = Math.min(Math.max(current + dir, 0), tSlideCount - 1);
+    goToTestimonial(next);
+  }
+  let tScrollTimeout;
+  testimonialCarousel.addEventListener('scroll', () => {
+    clearTimeout(tScrollTimeout);
+    tScrollTimeout = setTimeout(() => {
+      const i = Math.round(testimonialCarousel.scrollLeft / testimonialCarousel.clientWidth);
+      setActiveTDot(i);
+    }, 80);
+  });
+
+  // ---- Modal ----
+  function openModal(){ document.getElementById('modalOverlay').classList.add('open'); }
+  function closeModal(){ document.getElementById('modalOverlay').classList.remove('open'); }
+  function closeModalOnOverlay(e){ if(e.target.id === 'modalOverlay') closeModal(); }
+
+  // ---- Sticky bar subtle reactive shift on scroll (keeps it pinned, adds slight motion) ----
+  let lastScroll = 0;
+  let finalCtaVisible = false;
+  const stickyBar = document.getElementById('stickyBar');
+  const stockupSection = document.getElementById('stockupSection');
+
+  function updateStickyBar(scrollingDown){
+    if(finalCtaVisible){
+      stickyBar.style.transform = 'translate(-50%, 130%)';
+    } else if(scrollingDown){
+      stickyBar.style.transform = 'translate(-50%, 4px)';
+    } else {
+      stickyBar.style.transform = 'translate(-50%, 0)';
+    }
+  }
+
+  window.addEventListener('scroll', () => {
+    const cur = window.scrollY;
+
+    // Once the user reaches the second pay section ("Stock up. Save more."),
+    // the floating pay overlay is redundant — hide it for the rest of the page,
+    // and only bring it back if they scroll back up above that point.
+    if(stockupSection){
+      const stockupTop = stockupSection.getBoundingClientRect().top + window.scrollY;
+      finalCtaVisible = (cur + window.innerHeight * 0.5) > stockupTop;
+    }
+
+    updateStickyBar(cur > lastScroll && cur > 40);
+    lastScroll = cur;
+  });
+</script>
+
+</body>
+</html>
